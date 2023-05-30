@@ -128,18 +128,24 @@ class CounterRow(ctk.CTkFrame):
         current_cost = self.cost_var.get()
         current_counter = self.counter_var.get()
 
-        if (
-                current_cost.count(".") > 1 or
-                re.search(r"[^0-9.]", current_cost) is not None
-        ):
+        if current_cost == "":
+            self.cost_var.set("")
+        elif current_cost.count(".") > 1 or re.search(r"[^0-9.]+", current_cost) is not None:
             self.cost_var.set(self.last_cost)
         else:
             self.last_cost = self.cost_var.get()
 
-        if not re.search(r"^[0-9]$", self.counter_var.get()):
+        if current_counter == "":
+            self.counter_var.set("0")
+        elif not re.search(r"^[0-9]+$", self.counter_var.get()):
             self.counter_var.set(self.last_counter)
         else:
             self.last_counter = self.counter_var.get()
+
+        self.cost_var.set(self.cost_var.get().lstrip("0"))
+        self.counter_var.set(self.counter_var.get().lstrip("0"))
+        if self.counter_var.get() == "":
+            self.counter_var.set("0")
 
     def get_total(self):
         try:
