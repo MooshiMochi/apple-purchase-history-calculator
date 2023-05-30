@@ -6,10 +6,6 @@ BASE_WIDTH = 450
 BASE_HEIGHT = 200
 
 
-def print_size(item):
-    print(item.winfo_width(), item.winfo_height())
-
-
 class Application(ctk.CTk):
     def __init__(self):
         super().__init__()
